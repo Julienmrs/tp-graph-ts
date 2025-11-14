@@ -8,6 +8,7 @@ import { lineString, tag } from "@turf/turf";
  */
 export class Edge {
     id: string;
+    geometry: LineString
     private _source: Vertex;
     private _target: Vertex;
     
@@ -22,7 +23,7 @@ export class Edge {
     getTarget():Vertex {return this._target }
 
     getGeometry(): LineString {
-        return {
+        return this.geometry ? this.geometry : {
             type: "LineString",
             coordinates: [
                 this.getSource().coordinate,
@@ -30,5 +31,9 @@ export class Edge {
             ]
         }
     }
+    setGeometry(geometry: LineString){
+        this.geometry = geometry 
+    }
 
 }
+
