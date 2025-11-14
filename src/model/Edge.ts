@@ -1,26 +1,32 @@
 import { LineString } from "geojson";
 import { Vertex } from "./Vertex";
 import length from "@turf/length";
-import { lineString } from "@turf/turf";
+import { lineString, tag } from "@turf/turf";
 
 /**
  * An edge with its source and target
  */
 export class Edge {
     id: string;
-    source: Vertex;
-    target: Vertex;
-
+    private _source: Vertex;
+    private _target: Vertex;
+    
+    constructor(source: Vertex, target: Vertex){
+        this._source = source;
+        this._target = target;
+    }
     getLength(): number {
         return length(lineString(this.getGeometry().coordinates));
     }
+    getSource():Vertex {return this._source}
+    getTarget():Vertex {return this._target}
 
     getGeometry(): LineString {
         return {
             type: "LineString",
             coordinates: [
-                this.source.coordinate,
-                this.target.coordinate
+                this.getSource().coordinate,
+                this.getTarget().coordinate
             ]
         }
     }
