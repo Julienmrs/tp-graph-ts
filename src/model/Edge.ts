@@ -18,8 +18,8 @@ export class Edge {
     getLength(): number {
         return length(lineString(this.getGeometry().coordinates));
     }
-    getSource():Vertex {return this._source}
-    getTarget():Vertex {return this._target}
+    getSource():Vertex {return this._source }
+    getTarget():Vertex {return this._target }
 
     getGeometry(): LineString {
         return {
