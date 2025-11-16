@@ -15,7 +15,10 @@ export class Edge {
     constructor(source: Vertex, target: Vertex){
         this._source = source;
         this._target = target;
+        this._source._outEdges.push(this);
+        this._target._inEdges.push(this);
     }
+    
     getLength(): number {
         return length(lineString(this.getGeometry().coordinates));
     }
